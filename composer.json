@@ -24,6 +24,7 @@
         "mpdf/mpdf": "^8.2",
         "prettus/l5-repository": "^3.0",
         "smalot/pdfparser": "^2.11",
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^15.0",
         "webklex/laravel-imap": "^6.0"
     },
     "require-dev": {
@@ -61,6 +62,7 @@
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
             "Webkul\\Activity\\": "packages/Webkul/Activity/src",
+            "Webkul\\Billing\\": "packages/Webkul/Billing/src",
             "Webkul\\Admin\\": "packages/Webkul/Admin/src",
             "Webkul\\Attribute\\": "packages/Webkul/Attribute/src",
             "Webkul\\Contact\\": "packages/Webkul/Contact/src",

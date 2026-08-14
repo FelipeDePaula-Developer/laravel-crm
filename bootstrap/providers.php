@@ -6,6 +6,7 @@ use Konekt\Concord\ConcordServiceProvider;
 use Prettus\Repository\Providers\RepositoryServiceProvider;
 use Webkul\Activity\Providers\ActivityServiceProvider;
 use Webkul\Admin\Providers\AdminServiceProvider;
+use Webkul\Billing\Providers\BillingServiceProvider;
 use Webkul\Attribute\Providers\AttributeServiceProvider;
 use Webkul\Automation\Providers\WorkflowServiceProvider;
 use Webkul\Contact\Providers\ContactServiceProvider;
@@ -41,6 +42,7 @@ return [
      * Webkul Service Providers...
      */
     ActivityServiceProvider::class,
+    BillingServiceProvider::class,
     AdminServiceProvider::class,
     AttributeServiceProvider::class,
     WorkflowServiceProvider::class,
