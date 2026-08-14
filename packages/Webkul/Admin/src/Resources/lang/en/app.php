@@ -518,6 +518,9 @@ return [
                     'view' => 'View',
                     'name' => 'Name',
                     'organization-name' => 'Organization Name',
+                    'tag-name' => 'Tag Name',
+                    'google-export-not-connected' => 'Please connect your Google account first from Settings > Other Settings > Google Contacts.',
+                    'google-export-started' => 'Export to Google Contacts started.',
                 ],
             ],
             'view' => [
@@ -857,6 +860,8 @@ return [
                 'any-condition-are-true' => 'Any condition are true',
                 'add-condition' => 'Add Condition',
                 'add-action' => 'Add Action',
+                'no-webhook-found' => 'No webhooks found.',
+                'create-webhook' => 'Create a new webhook.',
                 'yes' => 'Yes',
                 'no' => 'No',
                 'email' => 'Email',
@@ -906,6 +911,19 @@ return [
                 'does-not-contain' => 'Does not contain',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'Google Contacts',
+                'not-connected-info' => 'Connect a Google account to export CRM contacts to Google Contacts.',
+                'connected-info' => 'Connected as :email.',
+                'connect-btn' => 'Connect Google Account',
+                'disconnect-btn' => 'Disconnect',
+                'connect-success' => 'Google account connected successfully.',
+                'connect-failed' => 'Unable to connect your Google account. Please try again.',
+                'disconnect-success' => 'Google account disconnected successfully.',
+            ],
+        ],
+
         'webforms' => [
             'index' => [
                 'title' => 'Webforms',
@@ -940,6 +958,7 @@ return [
                 'general' => 'General',
                 'leads' => 'Leads',
                 'person' => 'Person',
+                'pipeline' => 'Pipeline',
                 'save-btn' => 'Save Webform',
                 'submit-button-label' => 'Submit Button Label',
                 'submit-success-action' => 'Submit Success Action',
@@ -973,6 +992,7 @@ return [
                 'general' => 'General',
                 'leads' => 'Leads',
                 'person' => 'Person',
+                'pipeline' => 'Pipeline',
                 'preview' => 'Preview',
                 'public-url' => 'Public URL',
                 'redirect-to-url' => 'Redirect To URL',
@@ -1233,6 +1253,7 @@ return [
                 'update-success' => 'Webhook updated successfully.',
                 'delete-success' => 'Webhook deleted successfully.',
                 'delete-failed' => 'Webhook can not be deleted.',
+                'invalid-endpoint' => 'The webhook endpoint URL must be a public HTTP or HTTPS address.',
                 'datagrid' => [
                     'id' => 'ID',
                     'delete' => 'Delete',
@@ -1419,6 +1440,7 @@ return [
                 'is-unique' => 'Is Unique',
                 'labels' => 'Labels',
                 'general' => 'General',
+                'none' => 'None',
                 'numeric' => 'Numeric',
                 'decimal' => 'Decimal',
                 'url' => 'Url',
@@ -1477,6 +1499,7 @@ return [
                 'multiselect' => 'Multiselect',
                 'name' => 'Name',
                 'quick_add' => 'Quick Add',
+                'none' => 'None',
                 'numeric' => 'Numeric',
                 'option-deleted' => 'Attribute Option is deleted successfully',
                 'option-name' => 'Option Name',
@@ -1496,6 +1519,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'Persons',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'Email : \'%s\' is found more than once in the import file.',
+                            'duplicate-phone' => 'Phone : \'%s\' is found more than once in the import file.',
+                            'email-not-found' => 'Email : \'%s\' not found in the system.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'Products',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'Product with specified SKU not found',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'Leads',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'ID : \'%s\' not found in the system.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'Columns number "%s" have empty headers.',
+                    'column-name-invalid' => 'Invalid column names: "%s".',
+                    'column-not-found' => 'Required columns not found: %s.',
+                    'column-numbers' => 'Number of columns does not correspond to the number of rows in the header.',
+                    'invalid-attribute' => 'Header contains invalid attribute(s): "%s".',
+                    'system' => 'An unexpected system error occurred.',
+                    'wrong-quotes' => 'Curly quotes used instead of straight quotes.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'Action',
@@ -1811,6 +1874,7 @@ return [
                     'title' => 'Title',
                     'tags' => 'Tags',
                     'expected-close-date' => 'Expected Close Date',
+                    'date-to' => 'Date To',
                     'created-at' => 'Created At',
                 ],
                 'toolbar' => [
@@ -1977,7 +2041,7 @@ return [
                     'info' => 'Update your general settings here.',
                     'locale-settings' => [
                         'title' => 'Locale Settings',
-                        'title-info' => 'Defines the language used in the user interface, such as Arabic (ar), English (en), Spanish (es), Persian(fa) and Turkish (tr).',
+                        'title-info' => 'Defines the language used in the admin panel interface. The dropdown lists every locale available in your installation.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'Logo Image',
@@ -1991,6 +2055,8 @@ return [
                     'title' => 'Settings',
                     'info' => 'Update your settings here.',
                     'footer' => [
+                        'show' => 'Show Powered By',
+                        'show-info' => 'Show or hide the "Powered by" bar at the bottom of the admin panel.',
                         'info' => 'We can configure the powered by section here.',
                         'powered-by' => 'Powered by text editor',
                         'title' => 'Powered by Section Configurations',
@@ -2014,6 +2080,22 @@ return [
                         'settings' => 'Settings',
                         'title' => 'Menu Item Configurations',
                         'trash' => 'Trash',
+                    ],
+                    'dashboard' => [
+                        'title' => 'Dashboard Configurations',
+                        'info' => 'We can configure the default date range of the dashboard here.',
+                        'date-range' => 'Default Date Range',
+                        'date-range-info' => 'The period the dashboard loads with. The date pickers on the dashboard can still be adjusted for a one-off view.',
+                        'custom-days' => 'Custom Range (Days)',
+                        'custom-days-info' => 'Number of days to look back when the date range is set to Custom.',
+                        'ranges' => [
+                            '1-month' => '1 Month',
+                            '3-months' => '3 Months',
+                            '9-months' => '9 Months',
+                            '1-year' => '1 Year',
+                            '2-years' => '2 Years',
+                            'custom' => 'Custom',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'Brand Color',
@@ -2208,6 +2290,10 @@ return [
         'users-info' => 'Add, edit or delete users from CRM',
         'lead' => 'Lead',
         'lead-info' => 'Manage all your leads related settings in the CRM',
+        'sidebar' => [
+            'collapse' => 'Collapse',
+            'expand' => 'Expand',
+        ],
         'quick-add' => [
             'title' => 'Quick Add',
             'save' => 'Save',
@@ -2294,6 +2380,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'The field must be a valid code.',
             'decimal' => 'The :attribute must be a decimal.',
         ],
     ],
@@ -2328,6 +2415,13 @@ return [
         'csv' => 'CSV',
         'download' => 'Download',
         'export' => 'Export',
+        'google-contacts' => 'Google Contacts',
+        'google-contacts-in-progress' => 'Exporting your contacts to Google… this may take a moment.',
+        'google-contacts-total' => 'Total Contacts:',
+        'google-contacts-exported' => 'Exported:',
+        'google-contacts-duplicate' => 'Already Existed:',
+        'google-contacts-failed' => 'Failed:',
+        'google-contacts-summary' => 'Export finished: :exported exported, :duplicate already existed, :failed failed.',
         'no-records' => 'Nothing to export',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

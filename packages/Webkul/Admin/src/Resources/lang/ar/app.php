@@ -517,6 +517,9 @@ return [
                     'view' => 'عرض',
                     'name' => 'الاسم',
                     'organization-name' => 'اسم المؤسسة',
+                    'tag-name' => 'اسم الوسم',
+                    'google-export-not-connected' => 'يرجى توصيل حساب Google أولاً من الإعدادات > إعدادات أخرى > جهات اتصال Google.',
+                    'google-export-started' => 'بدأ التصدير إلى جهات اتصال Google.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'أي شرط صحيح',
                 'add-condition' => 'إضافة شرط',
                 'add-action' => 'إضافة إجراء',
+                'no-webhook-found' => 'لم يتم العثور على أي webhook.',
+                'create-webhook' => 'إنشاء webhook جديد.',
                 'yes' => 'نعم',
                 'no' => 'لا',
                 'email' => 'البريد الإلكتروني',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'لا يحتوي',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'جهات اتصال Google',
+                'not-connected-info' => 'قم بتوصيل حساب Google لتصدير جهات اتصال CRM إلى جهات اتصال Google.',
+                'connected-info' => 'متصل باسم :email.',
+                'connect-btn' => 'ربط حساب Google',
+                'disconnect-btn' => 'قطع الاتصال',
+                'connect-success' => 'تم ربط حساب Google بنجاح.',
+                'connect-failed' => 'تعذر ربط حساب Google الخاص بك. يرجى المحاولة مرة أخرى.',
+                'disconnect-success' => 'تم فصل حساب Google بنجاح.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'نماذج الويب',
@@ -939,6 +956,7 @@ return [
                 'general' => 'عام',
                 'leads' => 'العملاء المحتملون',
                 'person' => 'شخص',
+                'pipeline' => 'خط الأنابيب',
                 'save-btn' => 'حفظ نموذج الويب',
                 'submit-button-label' => 'تسمية زر الإرسال',
                 'submit-success-action' => 'إجراء نجاح الإرسال',
@@ -972,6 +990,7 @@ return [
                 'general' => 'عام',
                 'leads' => 'العملاء المحتملون',
                 'person' => 'شخص',
+                'pipeline' => 'خط الأنابيب',
                 'preview' => 'معاينة',
                 'public-url' => 'الرابط العام',
                 'redirect-to-url' => 'إعادة التوجيه إلى الرابط',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'تم تحديث الويب هوك بنجاح.',
                 'delete-success' => 'تم حذف الويب هوك بنجاح.',
                 'delete-failed' => 'لا يمكن حذف الويب هوك.',
+                'invalid-endpoint' => 'يجب أن يكون عنوان URL لنقطة نهاية الويب هوك عنوان HTTP أو HTTPS عامًا.',
                 'datagrid' => [
                     'id' => 'المعرف',
                     'delete' => 'حذف',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'فريد',
                 'labels' => 'التسميات',
                 'general' => 'عام',
+                'none' => 'بدون',
                 'numeric' => 'رقمي',
                 'decimal' => 'عشري',
                 'url' => 'رابط',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'اختيار متعدد',
                 'name' => 'الاسم',
                 'quick_add' => 'إضافة سريعة',
+                'none' => 'بدون',
                 'numeric' => 'رقمي',
                 'option-deleted' => 'تم حذف خيار الخاصية بنجاح',
                 'option-name' => 'اسم الخيار',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'الأشخاص',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'البريد الإلكتروني: \'%s\' تم العثور عليه أكثر من مرة في ملف الاستيراد.',
+                            'duplicate-phone' => 'الهاتف: \'%s\' تم العثور عليه أكثر من مرة في ملف الاستيراد.',
+                            'email-not-found' => 'البريد الإلكتروني: \'%s\' لم يتم العثور عليه في النظام.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'المنتجات',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'المنتج ذو الكود المحدد لم يتم العثور عليه.',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'العملاء المحتملون',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'المعرف: \'%s\' غير موجود في النظام.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'الأعمدة رقم "%s" تحتوي على رؤوس فارغة.',
+                    'column-name-invalid' => 'أسماء الأعمدة غير صالحة: "%s".',
+                    'column-not-found' => 'الأعمدة المطلوبة غير موجودة: %s.',
+                    'column-numbers' => 'عدد الأعمدة لا يتوافق مع عدد الصفوف في الرأس.',
+                    'invalid-attribute' => 'الرأس يحتوي على سمة غير صالحة: "%s".',
+                    'system' => 'حدث خطأ غير متوقع في النظام.',
+                    'wrong-quotes' => 'تم استخدام علامات الاقتباس الملتوية بدلاً من الاقتباسات المستقيمة.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'إجراء',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'العنوان',
                     'tags' => 'العلامات',
                     'expected-close-date' => 'تاريخ الإغلاق المتوقع',
+                    'date-to' => 'تاريخ إلى',
                     'created-at' => 'تم الإنشاء في',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'قم بتحديث إعداداتك العامة هنا.',
                     'locale-settings' => [
                         'title' => 'إعدادات اللغة',
-                        'title-info' => 'تعريف اللغة المستخدمة في واجهة المستخدم، مثل العربية (ar)، الإنجليزية (en)، الإسبانية (es)، الفارسية (fa) والتركية (tr).',
+                        'title-info' => 'يحدد اللغة المستخدمة في واجهة لوحة التحكم. تعرض القائمة المنسدلة جميع اللغات المتاحة في التثبيت الخاص بك.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'صورة الشعار',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'الإعدادات',
                     'info' => 'قم بتحديث إعداداتك هنا.',
                     'footer' => [
+                        'show' => 'إظهار "مدعوم بواسطة"',
+                        'show-info' => 'إظهار أو إخفاء شريط "مدعوم بواسطة" أسفل لوحة التحكم.',
                         'info' => 'يمكننا تكوين قسم "تم تطويره بواسطة" هنا.',
                         'powered-by' => 'محرر نص "تم تطويره بواسطة"',
                         'title' => 'إعدادات قسم "تم تطويره بواسطة"',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'الإعدادات',
                         'title' => 'إعدادات عناصر القائمة',
                         'trash' => 'سلة المهملات',
+                    ],
+                    'dashboard' => [
+                        'title' => 'إعدادات لوحة التحكم',
+                        'info' => 'يمكننا هنا تكوين النطاق الزمني الافتراضي للوحة التحكم.',
+                        'date-range' => 'النطاق الزمني الافتراضي',
+                        'date-range-info' => 'الفترة التي يتم تحميل لوحة التحكم بها. لا يزال بإمكانك تعديل محددات التاريخ في لوحة التحكم لعرض مؤقت.',
+                        'custom-days' => 'النطاق المخصص (بالأيام)',
+                        'custom-days-info' => 'عدد الأيام التي يتم الرجوع إليها عند تعيين النطاق الزمني إلى مخصص.',
+                        'ranges' => [
+                            '1-month' => 'شهر واحد',
+                            '3-months' => '3 أشهر',
+                            '9-months' => '9 أشهر',
+                            '1-year' => 'سنة واحدة',
+                            '2-years' => 'سنتان',
+                            'custom' => 'مخصص',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'لون العلامة التجارية',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'إضافة أو تعديل أو حذف المستخدمين من نظام CRM',
         'lead' => 'عميل محتمل',
         'lead-info' => 'إدارة جميع إعدادات العملاء المحتملين الخاصة بك في نظام CRM',
+        'sidebar' => [
+            'collapse' => 'طي',
+            'expand' => 'توسيع',
+        ],
         'quick-add' => [
             'title' => 'إضافة سريعة',
             'save' => 'حفظ',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'يجب أن يكون الحقل رمزًا صالحًا.',
             'decimal' => ':attribute يجب أن يكون رقمًا عشريًا.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'تحميل',
         'export' => 'تصدير',
+        'google-contacts' => 'جهات اتصال Google',
+        'google-contacts-in-progress' => 'جارٍ تصدير جهات الاتصال إلى Google... قد يستغرق هذا بعض الوقت.',
+        'google-contacts-total' => 'إجمالي جهات الاتصال:',
+        'google-contacts-exported' => 'تم التصدير:',
+        'google-contacts-duplicate' => 'موجود مسبقًا:',
+        'google-contacts-failed' => 'فشل:',
+        'google-contacts-summary' => 'اكتمل التصدير: تم تصدير :exported، :duplicate موجود مسبقًا، :failed فشل.',
         'no-records' => 'لا توجد سجلات للتصدير',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

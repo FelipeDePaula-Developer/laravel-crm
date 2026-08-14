@@ -517,6 +517,9 @@ return [
                     'view' => 'Görüntüle',
                     'name' => 'Ad',
                     'organization-name' => 'Kuruluş Adı',
+                    'tag-name' => 'Etiket Adı',
+                    'google-export-not-connected' => 'Lütfen önce Ayarlar > Diğer Ayarlar > Google Kişileri bölümünden Google hesabınızı bağlayın.',
+                    'google-export-started' => 'Google Kişilerine aktarım başlatıldı.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'Herhangi bir koşul doğru',
                 'add-condition' => 'Koşul Ekle',
                 'add-action' => 'Eylem Ekle',
+                'no-webhook-found' => 'Webhook bulunamadı.',
+                'create-webhook' => 'Yeni bir webhook oluşturun.',
                 'yes' => 'Evet',
                 'no' => 'Hayır',
                 'email' => 'E-posta',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'İçermez',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'Google Kişileri',
+                'not-connected-info' => 'CRM kişilerini Google Kişilerine aktarmak için bir Google hesabı bağlayın.',
+                'connected-info' => ':email olarak bağlandı.',
+                'connect-btn' => 'Google Hesabı Bağla',
+                'disconnect-btn' => 'Bağlantıyı Kes',
+                'connect-success' => 'Google hesabı başarıyla bağlandı.',
+                'connect-failed' => 'Google hesabınız bağlanamadı. Lütfen tekrar deneyin.',
+                'disconnect-success' => 'Google hesabı bağlantısı başarıyla kesildi.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'Web Formları',
@@ -939,6 +956,7 @@ return [
                 'general' => 'Genel',
                 'leads' => 'Fırsatlar',
                 'person' => 'Kişi',
+                'pipeline' => 'Pipeline',
                 'save-btn' => 'Web Formunu Kaydet',
                 'submit-button-label' => 'Gönderim Düğmesi Etiketi',
                 'submit-success-action' => 'Gönderim Başarı Eylemi',
@@ -972,6 +990,7 @@ return [
                 'general' => 'Genel',
                 'leads' => 'Fırsatlar',
                 'person' => 'Kişi',
+                'pipeline' => 'Pipeline',
                 'preview' => 'Önizleme',
                 'public-url' => 'Genel URL',
                 'redirect-to-url' => 'URL\'ye Yönlendir',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'Webhook başarıyla güncellendi.',
                 'delete-success' => 'Webhook başarıyla silindi.',
                 'delete-failed' => 'Webhook silinemedi.',
+                'invalid-endpoint' => 'Web kancası uç nokta URL\'si genel bir HTTP veya HTTPS adresi olmalıdır.',
                 'datagrid' => [
                     'id' => 'ID',
                     'delete' => 'Sil',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'Benzersiz mi',
                 'labels' => 'Etiketler',
                 'general' => 'Genel',
+                'none' => 'Yok',
                 'numeric' => 'Sayısal',
                 'decimal' => 'Ondalık',
                 'url' => 'URL',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'Çoklu Seçim',
                 'name' => 'Ad',
                 'quick_add' => 'Hızlı Ekle',
+                'none' => 'Yok',
                 'numeric' => 'Sayısal',
                 'option-deleted' => 'Öznitelik Seçeneği başarıyla silindi',
                 'option-name' => 'Seçenek Adı',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'Kişiler',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'E-posta: \'%s\' içe aktarma dosyasında birden fazla kez bulundu.',
+                            'duplicate-phone' => 'Telefon: \'%s\' içe aktarma dosyasında birden fazla kez bulundu.',
+                            'email-not-found' => 'E-posta: \'%s\' sistemde bulunamadı.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'Ürünler',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'Belirtilen SKU\'ya sahip ürün bulunamadı.',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'Müşteri Adayları',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'ID: \'%s\' sistemde bulunamadı.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => '"%s" numaralı sütunların başlıkları boş.',
+                    'column-name-invalid' => 'Geçersiz sütun adları: "%s".',
+                    'column-not-found' => 'Gerekli sütunlar bulunamadı: %s.',
+                    'column-numbers' => 'Sütun sayısı başlıktaki satır sayısına karşılık gelmiyor.',
+                    'invalid-attribute' => 'Başlık geçersiz öznitelikler içeriyor: "%s".',
+                    'system' => 'Beklenmeyen bir sistem hatası oluştu.',
+                    'wrong-quotes' => 'Doğru olmayan tırnak işaretleri kullanıldı.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'Eylem',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'Başlık',
                     'tags' => 'Etiketler',
                     'expected-close-date' => 'Beklenen Kapanış Tarihi',
+                    'date-to' => 'Bitiş Tarihi',
                     'created-at' => 'Oluşturulma Tarihi',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'Genel ayarlarınızı burada güncelleyin.',
                     'locale-settings' => [
                         'title' => 'Yerel Ayarlar',
-                        'title-info' => 'Kullanıcı arayüzünde kullanılan dili tanımlar, örneğin Arapça (ar), İngilizce (en), İspanyolca (es), Farsça (fa) ve Türkçe (tr).',
+                        'title-info' => 'Yönetim paneli arayüzünde kullanılan dili tanımlar. Açılır liste, kurulumunuzda mevcut olan tüm dilleri gösterir.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'Logo Resmi',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'Ayarlar',
                     'info' => 'Ayarlarınızı burada güncelleyin.',
                     'footer' => [
+                        'show' => '"Powered By" Göster',
+                        'show-info' => 'Yönetim panelinin altındaki "Powered by" çubuğunu gösterir veya gizler.',
                         'info' => 'Powered by bölümünü burada yapılandırabiliriz.',
                         'powered-by' => 'Powered by metin düzenleyici',
                         'title' => 'Powered by Bölüm Yapılandırmaları',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'Ayarlar',
                         'title' => 'Menü Öğesi Yapılandırmaları',
                         'trash' => 'Çöp Kutusu',
+                    ],
+                    'dashboard' => [
+                        'title' => 'Kontrol Paneli Yapılandırmaları',
+                        'info' => 'Kontrol panelinin varsayılan tarih aralığını burada yapılandırabiliriz.',
+                        'date-range' => 'Varsayılan Tarih Aralığı',
+                        'date-range-info' => 'Kontrol panelinin yüklendiği dönem. Kontrol panelindeki tarih seçicileri tek seferlik görünüm için yine de değiştirilebilir.',
+                        'custom-days' => 'Özel Aralık (Gün)',
+                        'custom-days-info' => 'Tarih aralığı Özel olarak ayarlandığında geriye dönük bakılacak gün sayısı.',
+                        'ranges' => [
+                            '1-month' => '1 Ay',
+                            '3-months' => '3 Ay',
+                            '9-months' => '9 Ay',
+                            '1-year' => '1 Yıl',
+                            '2-years' => '2 Yıl',
+                            'custom' => 'Özel',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'Marka Rengi',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'CRM’den kullanıcıları ekleyin, düzenleyin veya silin',
         'lead' => 'Lead',
         'lead-info' => 'CRM’de tüm lead ayarlarınızı yönetin',
+        'sidebar' => [
+            'collapse' => 'Daralt',
+            'expand' => 'Genişlet',
+        ],
         'quick-add' => [
             'title' => 'Hızlı Ekle',
             'save' => 'Kaydet',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'Alan geçerli bir kod olmalıdır.',
             'decimal' => ':attribute ondalıklı bir sayı olmalıdır.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'İndir',
         'export' => 'Dışa Aktar',
+        'google-contacts' => 'Google Kişileri',
+        'google-contacts-in-progress' => 'Kişileriniz Google\'a aktarılıyor... bu biraz zaman alabilir.',
+        'google-contacts-total' => 'Toplam Kişi:',
+        'google-contacts-exported' => 'Aktarıldı:',
+        'google-contacts-duplicate' => 'Zaten Vardı:',
+        'google-contacts-failed' => 'Başarısız:',
+        'google-contacts-summary' => 'Aktarım tamamlandı: :exported aktarıldı, :duplicate zaten vardı, :failed başarısız.',
         'no-records' => 'Dışa aktarılacak kayıt bulunamadı.',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

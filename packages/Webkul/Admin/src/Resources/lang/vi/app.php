@@ -517,6 +517,9 @@ return [
                     'view' => 'Xem',
                     'name' => 'Tên',
                     'organization-name' => 'Tên Tổ chức',
+                    'tag-name' => 'Tên thẻ',
+                    'google-export-not-connected' => 'Vui lòng kết nối tài khoản Google trước trong Cài đặt > Cài đặt khác > Google Contacts.',
+                    'google-export-started' => 'Đã bắt đầu xuất sang Google Contacts.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'Bất kỳ điều kiện nào cũng đúng',
                 'add-condition' => 'Thêm Điều kiện',
                 'add-action' => 'Thêm Hành động',
+                'no-webhook-found' => 'Không tìm thấy webhook.',
+                'create-webhook' => 'Tạo webhook mới.',
                 'yes' => 'Có',
                 'no' => 'Không',
                 'email' => 'Email',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'Không chứa',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'Google Contacts',
+                'not-connected-info' => 'Kết nối một tài khoản Google để xuất danh bạ CRM sang Google Contacts.',
+                'connected-info' => 'Đã kết nối với :email.',
+                'connect-btn' => 'Kết Nối Tài Khoản Google',
+                'disconnect-btn' => 'Ngắt Kết Nối',
+                'connect-success' => 'Kết nối tài khoản Google thành công.',
+                'connect-failed' => 'Không thể kết nối tài khoản Google của bạn. Vui lòng thử lại.',
+                'disconnect-success' => 'Đã ngắt kết nối tài khoản Google thành công.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'Biểu mẫu Web',
@@ -939,6 +956,7 @@ return [
                 'general' => 'Chung',
                 'leads' => 'Dẫn Dắt',
                 'person' => 'Người',
+                'pipeline' => 'Quy Trình',
                 'save-btn' => 'Lưu Biểu Mẫu Web',
                 'submit-button-label' => 'Nhãn Nút Gửi',
                 'submit-success-action' => 'Hành Động Thành Công Khi Gửi',
@@ -972,6 +990,7 @@ return [
                 'general' => 'Chung',
                 'leads' => 'Dẫn Dắt',
                 'person' => 'Người',
+                'pipeline' => 'Quy Trình',
                 'preview' => 'Xem Trước',
                 'public-url' => 'URL Công Khai',
                 'redirect-to-url' => 'Chuyển Hướng Đến URL',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'Webhook đã được cập nhật thành công.',
                 'delete-success' => 'Webhook đã được xóa thành công.',
                 'delete-failed' => 'Webhook không thể bị xóa.',
+                'invalid-endpoint' => 'URL điểm cuối webhook phải là địa chỉ HTTP hoặc HTTPS công khai.',
                 'datagrid' => [
                     'id' => 'ID',
                     'delete' => 'Xóa',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'Là Độc Nhất',
                 'labels' => 'Nhãn',
                 'general' => 'Chung',
+                'none' => 'Không có',
                 'numeric' => 'Số',
                 'decimal' => 'Thập Phân',
                 'url' => 'Url',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'Chọn Nhiều',
                 'name' => 'Tên',
                 'quick_add' => 'Thêm Nhanh',
+                'none' => 'Không có',
                 'numeric' => 'Số',
                 'option-deleted' => 'Tùy chọn thuộc tính đã được xóa thành công',
                 'option-name' => 'Tên Tùy Chọn',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'Persons',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'Email : \'%s\' is found more than once in the import file.',
+                            'duplicate-phone' => 'Phone : \'%s\' is found more than once in the import file.',
+                            'email-not-found' => 'Email : \'%s\' not found in the system.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'Products',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'Product with specified SKU not found',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'Leads',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'ID : \'%s\' not found in the system.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'Columns number "%s" have empty headers.',
+                    'column-name-invalid' => 'Invalid column names: "%s".',
+                    'column-not-found' => 'Required columns not found: %s.',
+                    'column-numbers' => 'Number of columns does not correspond to the number of rows in the header.',
+                    'invalid-attribute' => 'Header contains invalid attribute(s): "%s".',
+                    'system' => 'An unexpected system error occurred.',
+                    'wrong-quotes' => 'Curly quotes used instead of straight quotes.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'Action',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'Tiêu Đề',
                     'tags' => 'Thẻ',
                     'expected-close-date' => 'Ngày Dự Kiến Đóng',
+                    'date-to' => 'Ngày Đến',
                     'created-at' => 'Tạo Vào Lúc',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'Cập nhật cài đặt chung của bạn tại đây.',
                     'locale-settings' => [
                         'title' => 'Cài đặt ngôn ngữ',
-                        'title-info' => 'Định nghĩa ngôn ngữ được sử dụng trong giao diện người dùng, như tiếng Ả Rập (ar), tiếng Anh (en), tiếng Tây Ban Nha (es), tiếng Ba Tư (fa) và tiếng Thổ Nhĩ Kỳ (tr).',
+                        'title-info' => 'Xác định ngôn ngữ được sử dụng trong giao diện bảng quản trị. Danh sách thả xuống hiển thị tất cả ngôn ngữ có sẵn trong bản cài đặt của bạn.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'Hình ảnh Logo',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'Cài đặt',
                     'info' => 'Cập nhật cài đặt của bạn tại đây.',
                     'footer' => [
+                        'show' => 'Hiển thị "Powered By"',
+                        'show-info' => 'Hiển thị hoặc ẩn thanh "Powered by" ở cuối bảng quản trị.',
                         'info' => 'Chúng ta có thể cấu hình phần "Powered by" ở đây.',
                         'powered-by' => 'Trình soạn thảo văn bản "Powered by"',
                         'title' => 'Cấu hình phần "Powered by"',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'Cài đặt',
                         'title' => 'Cấu hình mục menu',
                         'trash' => 'Thùng rác',
+                    ],
+                    'dashboard' => [
+                        'title' => 'Cấu Hình Bảng Điều Khiển',
+                        'info' => 'Chúng ta có thể cấu hình khoảng thời gian mặc định của bảng điều khiển tại đây.',
+                        'date-range' => 'Khoảng Thời Gian Mặc Định',
+                        'date-range-info' => 'Khoảng thời gian bảng điều khiển tải theo mặc định. Bộ chọn ngày trên bảng điều khiển vẫn có thể điều chỉnh cho lần xem tạm thời.',
+                        'custom-days' => 'Khoảng Tùy Chỉnh (Ngày)',
+                        'custom-days-info' => 'Số ngày truy xuất khi khoảng thời gian được đặt là Tùy chỉnh.',
+                        'ranges' => [
+                            '1-month' => '1 Tháng',
+                            '3-months' => '3 Tháng',
+                            '9-months' => '9 Tháng',
+                            '1-year' => '1 Năm',
+                            '2-years' => '2 Năm',
+                            'custom' => 'Tùy chỉnh',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'Màu thương hiệu',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'Thêm, chỉnh sửa hoặc xóa người dùng khỏi CRM',
         'lead' => 'Lead',
         'lead-info' => 'Quản lý tất cả các cài đặt liên quan đến leads trong CRM',
+        'sidebar' => [
+            'collapse' => 'Thu gọn',
+            'expand' => 'Mở rộng',
+        ],
         'quick-add' => [
             'title' => 'Thêm nhanh',
             'save' => 'Lưu',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'Trường phải là một mã hợp lệ.',
             'decimal' => 'The :attribute must be a decimal.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'Tải Xuống',
         'export' => 'Xuất',
+        'google-contacts' => 'Google Contacts',
+        'google-contacts-in-progress' => 'Đang xuất danh bạ của bạn sang Google... việc này có thể mất một chút thời gian.',
+        'google-contacts-total' => 'Tổng Số Liên Hệ:',
+        'google-contacts-exported' => 'Đã Xuất:',
+        'google-contacts-duplicate' => 'Đã Tồn Tại:',
+        'google-contacts-failed' => 'Thất Bại:',
+        'google-contacts-summary' => 'Xuất hoàn tất: :exported đã xuất, :duplicate đã tồn tại, :failed thất bại.',
         'no-records' => 'Không có bản ghi nào được tìm thấy.',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

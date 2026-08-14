@@ -517,6 +517,9 @@ return [
                     'view' => 'Ver',
                     'name' => 'Nombre',
                     'organization-name' => 'Nombre de la Organización',
+                    'tag-name' => 'Nombre de etiqueta',
+                    'google-export-not-connected' => 'Conecta primero tu cuenta de Google desde Configuración > Otras Configuraciones > Google Contacts.',
+                    'google-export-started' => 'Exportación a Google Contacts iniciada.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'Cualquiera de las condiciones es verdadera',
                 'add-condition' => 'Agregar Condición',
                 'add-action' => 'Agregar Acción',
+                'no-webhook-found' => 'No se encontraron webhooks.',
+                'create-webhook' => 'Crear un nuevo webhook.',
                 'yes' => 'Sí',
                 'no' => 'No',
                 'email' => 'Correo Electrónico',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'No contiene',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'Google Contacts',
+                'not-connected-info' => 'Conecta una cuenta de Google para exportar contactos del CRM a Google Contacts.',
+                'connected-info' => 'Conectado como :email.',
+                'connect-btn' => 'Conectar Cuenta de Google',
+                'disconnect-btn' => 'Desconectar',
+                'connect-success' => 'Cuenta de Google conectada con éxito.',
+                'connect-failed' => 'No se pudo conectar tu cuenta de Google. Por favor, inténtalo de nuevo.',
+                'disconnect-success' => 'Cuenta de Google desconectada con éxito.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'Webforms',
@@ -939,6 +956,7 @@ return [
                 'general' => 'General',
                 'leads' => 'Leads',
                 'person' => 'Persona',
+                'pipeline' => 'Canal',
                 'save-btn' => 'Guardar Webform',
                 'submit-button-label' => 'Etiqueta del Botón de Enviar',
                 'submit-success-action' => 'Acción en caso de éxito de envío',
@@ -972,6 +990,7 @@ return [
                 'general' => 'General',
                 'leads' => 'Leads',
                 'person' => 'Persona',
+                'pipeline' => 'Canal',
                 'preview' => 'Vista Previa',
                 'public-url' => 'URL Pública',
                 'redirect-to-url' => 'Redirigir a la URL',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'Webhook actualizado exitosamente.',
                 'delete-success' => 'Webhook eliminado exitosamente.',
                 'delete-failed' => 'No se puede eliminar el Webhook.',
+                'invalid-endpoint' => 'La URL del endpoint del webhook debe ser una dirección HTTP o HTTPS pública.',
                 'datagrid' => [
                     'id' => 'ID',
                     'delete' => 'Eliminar',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'Es Único',
                 'labels' => 'Etiquetas',
                 'general' => 'General',
+                'none' => 'Ninguno',
                 'numeric' => 'Numérico',
                 'decimal' => 'Decimal',
                 'url' => 'Url',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'Selección Múltiple',
                 'name' => 'Nombre',
                 'quick_add' => 'Añadir Rápido',
+                'none' => 'Ninguno',
                 'numeric' => 'Numérico',
                 'option-deleted' => 'Opción de Atributo eliminada con éxito',
                 'option-name' => 'Nombre de Opción',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'Personas',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'Correo electrónico: \'%s\' se encontró más de una vez en el archivo de importación.',
+                            'duplicate-phone' => 'Teléfono: \'%s\' se encontró más de una vez en el archivo de importación.',
+                            'email-not-found' => 'Correo electrónico: \'%s\' no se encontró en el sistema.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'Productos',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'Producto con el SKU especificado no encontrado.',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'Clientes Potenciales',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'ID: \'%s\' no se encuentra en el sistema.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'Las columnas número "%s" tienen encabezados vacíos.',
+                    'column-name-invalid' => 'Nombres de columnas no válidos: "%s".',
+                    'column-not-found' => 'No se encontraron las columnas requeridas: %s.',
+                    'column-numbers' => 'El número de columnas no corresponde al número de filas en el encabezado.',
+                    'invalid-attribute' => 'El encabezado contiene atributos no válidos: "%s".',
+                    'system' => 'Ocurrió un error inesperado en el sistema.',
+                    'wrong-quotes' => 'Se usaron comillas curvas en lugar de comillas rectas.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'Acción',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'Título',
                     'tags' => 'Etiquetas',
                     'expected-close-date' => 'Fecha de Cierre Esperada',
+                    'date-to' => 'Fecha Hasta',
                     'created-at' => 'Creado En',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'Actualiza tus configuraciones generales aquí.',
                     'locale-settings' => [
                         'title' => 'Configuraciones de Idioma',
-                        'title-info' => 'Define el idioma utilizado en la interfaz de usuario, como Árabe (ar), Inglés (en), Español (es), Persa (fa) y Turco (tr).',
+                        'title-info' => 'Define el idioma utilizado en la interfaz del panel de administración. La lista desplegable muestra todos los idiomas disponibles en su instalación.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'Imagen del Logo',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'Configuraciones',
                     'info' => 'Actualiza tus configuraciones aquí.',
                     'footer' => [
+                        'show' => 'Mostrar "Desarrollado por"',
+                        'show-info' => 'Muestra u oculta la barra "Desarrollado por" en la parte inferior del panel de administración.',
                         'info' => 'Podemos configurar la sección de powered by aquí.',
                         'powered-by' => 'Editor de texto impulsado por',
                         'title' => 'Configuraciones de la Sección Powered by',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'Configuraciones',
                         'title' => 'Configuraciones de Elementos del Menú',
                         'trash' => 'Papelera',
+                    ],
+                    'dashboard' => [
+                        'title' => 'Configuraciones del Panel',
+                        'info' => 'Aquí podemos configurar el rango de fechas predeterminado del panel.',
+                        'date-range' => 'Rango de Fechas Predeterminado',
+                        'date-range-info' => 'El período con el que se carga el panel. Los selectores de fecha del panel aún se pueden ajustar para una vista puntual.',
+                        'custom-days' => 'Rango Personalizado (Días)',
+                        'custom-days-info' => 'Número de días a consultar cuando el rango de fechas es Personalizado.',
+                        'ranges' => [
+                            '1-month' => '1 mes',
+                            '3-months' => '3 meses',
+                            '9-months' => '9 meses',
+                            '1-year' => '1 año',
+                            '2-years' => '2 años',
+                            'custom' => 'Personalizado',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'Color de Marca',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'Agregar, editar o eliminar usuarios del CRM',
         'lead' => 'Lead',
         'lead-info' => 'Administra todas las configuraciones relacionadas con los leads en el CRM',
+        'sidebar' => [
+            'collapse' => 'Contraer',
+            'expand' => 'Expandir',
+        ],
         'quick-add' => [
             'title' => 'Añadir rápido',
             'save' => 'Guardar',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'El campo debe ser un código válido.',
             'decimal' => 'El :attribute debe ser un número decimal.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'Descargar',
         'export' => 'Exportar',
+        'google-contacts' => 'Google Contacts',
+        'google-contacts-in-progress' => 'Exportando tus contactos a Google… esto puede tardar un momento.',
+        'google-contacts-total' => 'Contactos Totales:',
+        'google-contacts-exported' => 'Exportados:',
+        'google-contacts-duplicate' => 'Ya Existían:',
+        'google-contacts-failed' => 'Fallidos:',
+        'google-contacts-summary' => 'Exportación finalizada: :exported exportados, :duplicate ya existían, :failed fallidos.',
         'no-records' => 'No se encontraron registros.',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

@@ -517,6 +517,9 @@ return [
                     'view' => 'مشاهده',
                     'name' => 'نام',
                     'organization-name' => 'نام سازمان',
+                    'tag-name' => 'نام برچسب',
+                    'google-export-not-connected' => 'لطفاً ابتدا حساب Google خود را از تنظیمات > تنظیمات دیگر > مخاطبین گوگل متصل کنید.',
+                    'google-export-started' => 'صدور به مخاطبین گوگل آغاز شد.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'هر شرطی صحیح است',
                 'add-condition' => 'افزودن شرط',
                 'add-action' => 'افزودن اقدام',
+                'no-webhook-found' => 'هیچ وب‌هوکی یافت نشد.',
+                'create-webhook' => 'ایجاد وب‌هوک جدید.',
                 'yes' => 'بله',
                 'no' => 'خیر',
                 'email' => 'ایمیل',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'شامل نمی‌شود',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'مخاطبین گوگل',
+                'not-connected-info' => 'یک حساب Google متصل کنید تا مخاطبین CRM را به مخاطبین گوگل صادر کنید.',
+                'connected-info' => 'متصل به عنوان :email.',
+                'connect-btn' => 'اتصال حساب Google',
+                'disconnect-btn' => 'قطع اتصال',
+                'connect-success' => 'حساب Google با موفقیت متصل شد.',
+                'connect-failed' => 'اتصال حساب Google شما ممکن نشد. لطفاً دوباره تلاش کنید.',
+                'disconnect-success' => 'اتصال حساب Google با موفقیت قطع شد.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'فرم‌های وب',
@@ -939,6 +956,7 @@ return [
                 'general' => 'عمومی',
                 'leads' => 'سرنخ‌ها',
                 'person' => 'شخص',
+                'pipeline' => 'پایپ‌لاین',
                 'save-btn' => 'ذخیره فرم وب',
                 'submit-button-label' => 'برچسب دکمه ارسال',
                 'submit-success-action' => 'عملکرد موفقیت آمیز ارسال',
@@ -972,6 +990,7 @@ return [
                 'general' => 'عمومی',
                 'leads' => 'سرنخ‌ها',
                 'person' => 'شخص',
+                'pipeline' => 'پایپ‌لاین',
                 'preview' => 'پیش‌نمایش',
                 'public-url' => 'آدرس عمومی',
                 'redirect-to-url' => 'انتقال به آدرس',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'وب‌هوک با موفقیت به‌روزرسانی شد.',
                 'delete-success' => 'وب‌هوک با موفقیت حذف شد.',
                 'delete-failed' => 'وب‌هوک قابل حذف نیست.',
+                'invalid-endpoint' => 'آدرس نقطه پایانی وب‌هوک باید یک آدرس عمومی HTTP یا HTTPS باشد.',
                 'datagrid' => [
                     'id' => 'شناسه',
                     'delete' => 'حذف',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'منحصربه‌فرد است',
                 'labels' => 'برچسب‌ها',
                 'general' => 'عمومی',
+                'none' => 'هیچ‌کدام',
                 'numeric' => 'عددی',
                 'decimal' => 'اعشاری',
                 'url' => 'آدرس',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'چند انتخابی',
                 'name' => 'نام',
                 'quick_add' => 'افزودن سریع',
+                'none' => 'هیچ‌کدام',
                 'numeric' => 'عددی',
                 'option-deleted' => 'گزینه ویژگی با موفقیت حذف شد',
                 'option-name' => 'نام گزینه',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'افراد',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'ایمیل: \'%s\' بیش از یک بار در فایل واردات یافت شد.',
+                            'duplicate-phone' => 'تلفن: \'%s\' بیش از یک بار در فایل واردات یافت شد.',
+                            'email-not-found' => 'ایمیل: \'%s\' در سیستم یافت نشد.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'محصولات',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'محصول با کد SKU مشخص شده یافت نشد.',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'سرنخ‌ها',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'شناسه: \'%s\' در سیستم یافت نشد.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'ستون‌های شماره "%s" دارای سرصفحه‌های خالی هستند.',
+                    'column-name-invalid' => 'نام‌های ستون نامعتبر: "%s".',
+                    'column-not-found' => 'ستون‌های مورد نیاز یافت نشد: %s.',
+                    'column-numbers' => 'تعداد ستون‌ها با تعداد سطرهای سرصفحه مطابقت ندارد.',
+                    'invalid-attribute' => 'سرصفحه شامل ویژگی‌های نامعتبر است: "%s".',
+                    'system' => 'خطای غیرمنتظره‌ای در سیستم رخ داد.',
+                    'wrong-quotes' => 'به جای گیومه‌های مستقیم از گیومه‌های خمیده استفاده شده است.',
+                    'already-exists' => 'The :attribute already exists.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'عملیات',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'عنوان',
                     'tags' => 'برچسب‌ها',
                     'expected-close-date' => 'تاریخ بسته شدن مورد انتظار',
+                    'date-to' => 'تاریخ تا',
                     'created-at' => 'تاریخ ایجاد',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'تنظیمات عمومی خود را اینجا به‌روزرسانی کنید.',
                     'locale-settings' => [
                         'title' => 'تنظیمات محلی',
-                        'title-info' => 'زبان مورد استفاده در رابط کاربری را تعریف می‌کند، مانند عربی (ar)، انگلیسی (en)، اسپانیایی (es)، فارسی (fa) و ترکی (tr).',
+                        'title-info' => 'زبان مورد استفاده در رابط پنل مدیریت را تعیین می‌کند. فهرست کشویی همه زبان‌های موجود در نصب شما را نمایش می‌دهد.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'تصویر لوگو',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'تنظیمات',
                     'info' => 'تنظیمات خود را اینجا به‌روزرسانی کنید.',
                     'footer' => [
+                        'show' => 'نمایش «قدرت‌گرفته از»',
+                        'show-info' => 'نوار «قدرت‌گرفته از» را در پایین پنل مدیریت نمایش داده یا پنهان می‌کند.',
                         'info' => 'ما می‌توانیم بخش "توسعه یافته توسط" را اینجا پیکربندی کنیم.',
                         'powered-by' => 'توسعه یافته توسط ویرایشگر متن',
                         'title' => 'پیکربندی بخش "توسعه یافته توسط"',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'تنظیمات',
                         'title' => 'پیکربندی آیتم‌های منو',
                         'trash' => 'زباله‌دان',
+                    ],
+                    'dashboard' => [
+                        'title' => 'پیکربندی داشبورد',
+                        'info' => 'در اینجا می‌توانیم بازه زمانی پیش‌فرض داشبورد را پیکربندی کنیم.',
+                        'date-range' => 'بازه زمانی پیش‌فرض',
+                        'date-range-info' => 'دوره‌ای که داشبورد با آن بارگذاری می‌شود. انتخابگرهای تاریخ در داشبورد همچنان برای مشاهده موقت قابل تغییر هستند.',
+                        'custom-days' => 'بازه سفارشی (روز)',
+                        'custom-days-info' => 'تعداد روزهایی که هنگام تنظیم بازه زمانی روی سفارشی بررسی می‌شود.',
+                        'ranges' => [
+                            '1-month' => '1 ماه',
+                            '3-months' => '3 ماه',
+                            '9-months' => '9 ماه',
+                            '1-year' => '1 سال',
+                            '2-years' => '2 سال',
+                            'custom' => 'سفارشی',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'رنگ برند',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'اضافه، ویرایش یا حذف کاربران از CRM',
         'lead' => 'لید',
         'lead-info' => 'مدیریت همه تنظیمات مربوط به لیدها در CRM',
+        'sidebar' => [
+            'collapse' => 'جمع کردن',
+            'expand' => 'باز کردن',
+        ],
         'quick-add' => [
             'title' => 'افزودن سریع',
             'save' => 'ذخیره',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'این فیلد باید یک کد معتبر باشد.',
             'decimal' => ':attribute باید یک عدد اعشاری باشد.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'دانلود',
         'export' => 'صادر کردن',
+        'google-contacts' => 'مخاطبین گوگل',
+        'google-contacts-in-progress' => 'در حال صادر کردن مخاطبین شما به گوگل... این ممکن است کمی طول بکشد.',
+        'google-contacts-total' => 'مجموع مخاطبین:',
+        'google-contacts-exported' => 'صادر شده:',
+        'google-contacts-duplicate' => 'از قبل موجود بود:',
+        'google-contacts-failed' => 'ناموفق:',
+        'google-contacts-summary' => 'صدور به پایان رسید: :exported صادر شد، :duplicate از قبل موجود بود، :failed ناموفق بود.',
         'no-records' => 'هیچ سوابقی برای صادر کردن وجود ندارد.',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

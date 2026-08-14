@@ -3,9 +3,13 @@
 namespace Webkul\Admin\DataGrids\Contact;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Models\AttributeValue;
 use Webkul\Contact\Repositories\OrganizationRepository;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Tag\Repositories\TagRepository;
 
 class PersonDataGrid extends DataGrid
 {
@@ -28,9 +32,35 @@ class PersonDataGrid extends DataGrid
                 'persons.emails',
                 'persons.contact_numbers',
                 'organizations.name as organization',
-                'organizations.id as organization_id'
+                'organizations.id as organization_id',
+                'tags.name as tag_name'
             )
-            ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id');
+            ->leftJoin('organizations', 'persons.organization_id', '=', 'organizations.id')
+            ->leftJoin('person_tags', 'persons.id', '=', 'person_tags.person_id')
+            ->leftJoin('tags', 'tags.id', '=', 'person_tags.tag_id')
+            ->groupBy('persons.id');
+
+        /**
+         * Custom (user defined) attribute values live in the EAV `attribute_values` table, so they
+         * are pulled in as correlated sub-selects only when exporting. They are hidden from the
+         * grid display (see prepareColumns) but included in the exported file.
+         */
+        if (request()->boolean('export')) {
+            $tablePrefix = DB::getTablePrefix();
+
+            foreach ($this->getCustomAttributes() as $attribute) {
+                $valueColumn = AttributeValue::$attributeTypeFields[$attribute->type] ?? 'text_value';
+
+                $queryBuilder->addSelect(DB::raw(
+                    '(SELECT '.$tablePrefix.'attribute_values.'.$valueColumn.
+                    ' FROM '.$tablePrefix.'attribute_values'.
+                    ' WHERE '.$tablePrefix.'attribute_values.entity_id = '.$tablePrefix.'persons.id'.
+                    ' AND '.$tablePrefix.'attribute_values.attribute_id = '.(int) $attribute->id.
+                    ' AND '.$tablePrefix."attribute_values.entity_type = 'persons'".
+                    ' LIMIT 1) as '.$attribute->code
+                ));
+            }
+        }
 
         if ($userIds = bouncer()->getAuthorizedUserIds()) {
             $queryBuilder->whereIn('persons.user_id', $userIds);
@@ -39,6 +69,7 @@ class PersonDataGrid extends DataGrid
         $this->addFilter('id', 'persons.id');
         $this->addFilter('person_name', 'persons.name');
         $this->addFilter('organization', 'organizations.name');
+        $this->addFilter('tag_name', 'tags.name');
 
         return $queryBuilder;
     }
@@ -102,6 +133,55 @@ class PersonDataGrid extends DataGrid
                 ],
             ],
         ]);
+
+        $this->addColumn([
+            'index' => 'tag_name',
+            'label' => trans('admin::app.contacts.persons.index.datagrid.tag-name'),
+            'type' => 'string',
+            'searchable' => false,
+            'sortable' => true,
+            'filterable' => true,
+            'filterable_type' => 'searchable_dropdown',
+            'closure' => fn ($row) => $row->tag_name ?? '--',
+            'filterable_options' => [
+                'repository' => TagRepository::class,
+                'column' => [
+                    'label' => 'name',
+                    'value' => 'name',
+                ],
+            ],
+        ]);
+
+        /**
+         * User defined attributes are hidden from the grid but included in the export so the data
+         * entered into custom fields can be exported alongside the built-in columns.
+         */
+        if (request()->boolean('export')) {
+            foreach ($this->getCustomAttributes() as $attribute) {
+                $this->addColumn([
+                    'index' => $attribute->code,
+                    'label' => $attribute->name,
+                    'type' => 'string',
+                    'searchable' => false,
+                    'sortable' => false,
+                    'filterable' => false,
+                    'visibility' => false,
+                ]);
+            }
+        }
+    }
+
+    /**
+     * Retrieve the user defined attributes for persons.
+     */
+    protected function getCustomAttributes(): Collection
+    {
+        static $attributes;
+
+        return $attributes ??= Attribute::query()
+            ->where('entity_type', 'persons')
+            ->where('is_user_defined', 1)
+            ->get();
     }
 
     /**

@@ -517,6 +517,9 @@ return [
                     'view' => 'Visualizar',
                     'name' => 'Nome',
                     'organization-name' => 'Nome da Empresa',
+                    'tag-name' => 'Nome da Tag',
+                    'google-export-not-connected' => 'Conecte sua conta do Google primeiro em Configurações > Outras Configurações > Google Contacts.',
+                    'google-export-started' => 'Exportação para o Google Contacts iniciada.',
                 ],
             ],
             'view' => [
@@ -856,6 +859,8 @@ return [
                 'any-condition-are-true' => 'Qualquer condição é verdadeira',
                 'add-condition' => 'Adicionar Condição',
                 'add-action' => 'Adicionar Ação',
+                'no-webhook-found' => 'Nenhum webhook encontrado.',
+                'create-webhook' => 'Criar um novo webhook.',
                 'yes' => 'Sim',
                 'no' => 'Não',
                 'email' => 'E-mail',
@@ -905,6 +910,18 @@ return [
                 'does-not-contain' => 'Não contém',
             ],
         ],
+        'google-contacts' => [
+            'index' => [
+                'title' => 'Google Contacts',
+                'not-connected-info' => 'Conecte uma conta do Google para exportar contatos do CRM para o Google Contacts.',
+                'connected-info' => 'Conectado como :email.',
+                'connect-btn' => 'Conectar Conta do Google',
+                'disconnect-btn' => 'Desconectar',
+                'connect-success' => 'Conta do Google conectada com sucesso.',
+                'connect-failed' => 'Não foi possível conectar sua conta do Google. Tente novamente.',
+                'disconnect-success' => 'Conta do Google desconectada com sucesso.',
+            ],
+        ],
         'webforms' => [
             'index' => [
                 'title' => 'Webforms',
@@ -939,6 +956,7 @@ return [
                 'general' => 'Geral',
                 'leads' => 'Oportunidades',
                 'person' => 'Pessoa',
+                'pipeline' => 'Funil',
                 'save-btn' => 'Salvar Webform',
                 'submit-button-label' => 'Rótulo do Botão de Envio',
                 'submit-success-action' => 'Ação de Sucesso ao Enviar',
@@ -972,6 +990,7 @@ return [
                 'general' => 'Geral',
                 'leads' => 'Oportunidades',
                 'person' => 'Pessoa',
+                'pipeline' => 'Funil',
                 'preview' => 'Visualizar',
                 'public-url' => 'URL Pública',
                 'redirect-to-url' => 'Redirecionar Para URL',
@@ -1232,6 +1251,7 @@ return [
                 'update-success' => 'Webhook atualizado com sucesso.',
                 'delete-success' => 'Webhook deletado com sucesso.',
                 'delete-failed' => 'Webhook não pode ser deletado.',
+                'invalid-endpoint' => 'A URL do endpoint do webhook deve ser um endereço HTTP ou HTTPS público.',
                 'datagrid' => [
                     'id' => 'ID',
                     'delete' => 'Deletar',
@@ -1418,6 +1438,7 @@ return [
                 'is-unique' => 'É Único',
                 'labels' => 'Rótulos',
                 'general' => 'Geral',
+                'none' => 'Nenhum',
                 'numeric' => 'Numérico',
                 'decimal' => 'Decimal',
                 'url' => 'URL',
@@ -1476,6 +1497,7 @@ return [
                 'multiselect' => 'Multiseleção',
                 'name' => 'Nome',
                 'quick_add' => 'Adicionar Rápido',
+                'none' => 'Nenhum',
                 'numeric' => 'Numérico',
                 'option-deleted' => 'Opção de Atributo eliminada com sucesso',
                 'option-name' => 'Nome da Opção',
@@ -1495,6 +1517,46 @@ return [
             ],
         ],
         'data-transfer' => [
+            'importers' => [
+                'persons' => [
+                    'title' => 'Pessoas',
+                    'validation' => [
+                        'errors' => [
+                            'duplicate-email' => 'E-mail : \'%s\' é encontrado mais de uma vez no arquivo de importação.',
+                            'duplicate-phone' => 'Telefone : \'%s\' é encontrado mais de uma vez no arquivo de importação.',
+                            'email-not-found' => 'E-mail : \'%s\' não foi encontrado no sistema.',
+                        ],
+                    ],
+                ],
+                'products' => [
+                    'title' => 'Produtos',
+                    'validation' => [
+                        'errors' => [
+                            'sku-not-found' => 'Produto com este código não foi encontrado',
+                        ],
+                    ],
+                ],
+                'leads' => [
+                    'title' => 'Oportunidades',
+                    'validation' => [
+                        'errors' => [
+                            'id-not-found' => 'ID : \'%s\' não foi encontrado no sistema.',
+                        ],
+                    ],
+                ],
+            ],
+            'validation' => [
+                'errors' => [
+                    'column-empty-headers' => 'As colunas de número "%s" têm cabeçalhos vazios.',
+                    'column-name-invalid' => 'Nomes de colunas inválidos: "%s".',
+                    'column-not-found' => 'Colunas obrigatórias não encontradas: %s.',
+                    'column-numbers' => 'O número de colunas não corresponde ao número de linhas no cabeçalho.',
+                    'invalid-attribute' => 'O cabeçalho contém atributo(s) inválido(s): "%s".',
+                    'system' => 'Ocorreu um erro inesperado no sistema.',
+                    'wrong-quotes' => 'Aspas curvas usadas em vez de aspas retas.',
+                    'already-exists' => 'O :attribute já existe.',
+                ],
+            ],
             'imports' => [
                 'create' => [
                     'action' => 'Action',
@@ -1810,6 +1872,7 @@ return [
                     'title' => 'Título',
                     'tags' => 'Tags',
                     'expected-close-date' => 'Data esperada de fechamento',
+                    'date-to' => 'Data esperada de fechamento',
                     'created-at' => 'Criado em',
                 ],
                 'toolbar' => [
@@ -1976,7 +2039,7 @@ return [
                     'info' => 'Atualize suas configurações gerais aqui.',
                     'locale-settings' => [
                         'title' => 'Configurações de Idioma',
-                        'title-info' => 'Define o idioma usado na interface do usuário.',
+                        'title-info' => 'Define o idioma usado na interface do painel administrativo. A lista suspensa exibe todos os idiomas disponíveis na sua instalação.',
                     ],
                     'admin-logo' => [
                         'logo-image' => 'Imagem do Logo',
@@ -1990,6 +2053,8 @@ return [
                     'title' => 'Configurações',
                     'info' => 'Atualize suas configurações aqui.',
                     'footer' => [
+                        'show' => 'Exibir "Desenvolvido por"',
+                        'show-info' => 'Exibe ou oculta a barra "Desenvolvido por" na parte inferior do painel administrativo.',
                         'info' => 'Podemos configurar a seção "Desenvolvido por" aqui.',
                         'powered-by' => 'Editor de texto "Desenvolvido por"',
                         'title' => 'Configurações da Seção "Desenvolvido por"',
@@ -2013,6 +2078,22 @@ return [
                         'settings' => 'Configurações',
                         'title' => 'Configurações dos Itens de Menu',
                         'trash' => 'Lixeira',
+                    ],
+                    'dashboard' => [
+                        'title' => 'Configurações do Painel',
+                        'info' => 'Aqui podemos configurar o intervalo de datas padrão do painel.',
+                        'date-range' => 'Intervalo de Datas Padrão',
+                        'date-range-info' => 'O período com que o painel é carregado. Os seletores de data no painel ainda podem ser ajustados para uma visualização pontual.',
+                        'custom-days' => 'Intervalo Personalizado (Dias)',
+                        'custom-days-info' => 'Número de dias a consultar quando o intervalo de datas for Personalizado.',
+                        'ranges' => [
+                            '1-month' => '1 Mês',
+                            '3-months' => '3 Meses',
+                            '9-months' => '9 Meses',
+                            '1-year' => '1 Ano',
+                            '2-years' => '2 Anos',
+                            'custom' => 'Personalizado',
+                        ],
                     ],
                     'menu-color' => [
                         'brand-color' => 'Cor da Marca',
@@ -2207,6 +2288,10 @@ return [
         'users-info' => 'Adicionar, editar ou excluir usuários do CRM',
         'lead' => 'Negócio',
         'lead-info' => 'Gerencie todas as configurações relacionadas aos Negócios no CRM',
+        'sidebar' => [
+            'collapse' => 'Recolher',
+            'expand' => 'Expandir',
+        ],
         'quick-add' => [
             'title' => 'Adição rápida',
             'save' => 'Salvar',
@@ -2293,6 +2378,7 @@ return [
     ],
     'validations' => [
         'message' => [
+            'code' => 'O campo deve ser um código válido.',
             'decimal' => 'The :attribute must be a decimal.',
         ],
     ],
@@ -2327,6 +2413,13 @@ return [
         'csv' => 'CSV',
         'download' => 'Download',
         'export' => 'Exportar',
+        'google-contacts' => 'Google Contacts',
+        'google-contacts-in-progress' => 'Exportando seus contatos para o Google… isso pode levar um momento.',
+        'google-contacts-total' => 'Total de Contatos:',
+        'google-contacts-exported' => 'Exportados:',
+        'google-contacts-duplicate' => 'Já Existiam:',
+        'google-contacts-failed' => 'Falharam:',
+        'google-contacts-summary' => 'Exportação concluída: :exported exportados, :duplicate já existiam, :failed falharam.',
         'no-records' => 'Nenhum registro encontrado.',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',

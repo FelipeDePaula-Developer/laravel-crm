@@ -7,15 +7,18 @@ use Illuminate\Support\Collection;
 use Webkul\Core\Repositories\CoreConfigRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
+use Webkul\Core\Traits\Sanitizer;
 
 class Core
 {
+    use Sanitizer;
+
     /**
      * The Krayin version.
      *
      * @var string
      */
-    const KRAYIN_VERSION = '2.2.3';
+    const KRAYIN_VERSION = '2.2.5';
 
     /**
      * Create a new instance.
